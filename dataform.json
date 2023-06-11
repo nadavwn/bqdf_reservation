@@ -1,0 +1,13 @@
+{
+  "defaultSchema": "dataform",
+  "assertionSchema": "dataform_assertions",
+  "warehouse": "bigquery",
+  "defaultDatabase": "nadav-playground",
+  "defaultLocation": "us",
+  "vars": {
+           "max_configurtion":"200",
+           "reservation_name":"`doit-playground-bq-mgmt.region-us.nadav-test`"
+          }
+}
+
+    

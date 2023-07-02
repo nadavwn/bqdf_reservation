@@ -1,0 +1,20 @@
+config {
+ type: "operations",
+ hasOutput: true
+ }
+
+ CREATE OR REPLACE VIEW ${self()} AS (SELECT 1 AS TEST);
+
+BEGIN
+  CREATE TEMP TABLE to_drop (drop_string STRING) AS (
+  SELECT
+    CONCAT("DROP ASSIGNMENT IF EXISTS `",project_id,".",SPLIT(ddl,".")[OFFSET(1)],".",reservation_name,".",assignment_id,"`")
+  FROM
+    ${dataform.projectConfig.vars.region}.INFORMATION_SCHEMA.ASSIGNMENTS_BY_PROJECT
+  WHERE
+    assignee_id = ${dataform.projectConfig.vars.assigned_project} AND job_type = 'QUERY' ); 
+  FOR drop_statement IN (
+  SELECT drop_string FROM to_drop) 
+  DO EXECUTE IMMEDIATE   drop_statement.drop_string;
+  END   FOR;
+END;

@@ -1,8 +1,5 @@
 config { type: "operations" }
 ALTER RESERVATION
- -- `doit-playground-bq-mgmt.region-us.nadav-test`
- ${dataform.projectConfig.vars.reservation_name}
+${dataform.projectConfig.vars.reservation_prefix}.${dataform.projectConfig.vars.prod_reservation_name}
 SET OPTIONS (
-  autoscale_max_slots = ${dataform.projectConfig.vars.max_configurtion})
-
--- autoscale_max_slots = 300)
+autoscale_max_slots =${dataform.projectConfig.vars.prod_max_configurtion})

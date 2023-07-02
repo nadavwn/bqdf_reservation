@@ -1,0 +1,10 @@
+config { type: "operations" }
+
+select * from ${ref('dep_drop_assignment')};
+
+CREATE ASSIGNMENT
+${dataform.projectConfig.vars.reservation_name}.${dataform.projectConfig.vars.assignment_id}
+OPTIONS(
+assignee=CONCAT("projects/",${dataform.projectConfig.vars.assigned_project}),
+job_type="QUERY")
+
